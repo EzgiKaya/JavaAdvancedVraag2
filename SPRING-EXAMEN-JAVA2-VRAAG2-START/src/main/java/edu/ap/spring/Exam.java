@@ -11,7 +11,17 @@ public class Exam {
 	// priemgetallen terug te geven
 	// 2 punten
 	public int[] getPrimes(int[] numbers) {
-		return Arrays.stream(numbers).filter(i -> Primes.isPrime(i))
+		return Arrays.stream(numbers).filter(i -> isPrime(i)).toArray();
+	}
+
+	// methode voor vergemakkelijking - ezgi
+	public static boolean isPrime(int number) {
+		for (int i = 2; i <= number / 2; i++) {
+			if (number % i == 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	// Maak gebruik van lambdas en streams alle lowercase characters
@@ -25,7 +35,13 @@ public class Exam {
 	// x-coordinaten uit de lijst van points te berekenen
 	// 1 punt
 	public int sumOfX(List<Point> points) {
-		
+	    OptionalInt i = points
+                .stream()
+                .map( p -> p.getX())
+                .mapToInt(x -> x.intValue() )
+                .reduce((x,y) -> x+y);
+
+	    return i.getAsInt();
 	}
 	
 	// Maak gebruik van lambdas en streams om een comma-separated
@@ -33,6 +49,13 @@ public class Exam {
 	// zijn aan twee
 	// 2 punten
 	public String getXOverTwo(List<Point> points) {
-		
+        Optional<String> answer = points.stream()
+                .map(p -> p.getX())
+                .filter( x -> x > 2)
+                .map( x -> x.toString())
+                .reduce((x, y) -> x + "," + y);
+
+
+                return answer.toString();
 	}
 }
