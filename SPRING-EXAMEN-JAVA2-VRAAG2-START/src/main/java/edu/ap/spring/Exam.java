@@ -35,13 +35,11 @@ public class Exam {
 	// x-coordinaten uit de lijst van points te berekenen
 	// 1 punt
 	public int sumOfX(List<Point> points) {
-	    OptionalInt i = points
+	    return points
                 .stream()
                 .map( p -> p.getX())
                 .mapToInt(x -> x.intValue() )
-                .reduce((x,y) -> x+y);
-
-	    return i.getAsInt();
+                .reduce((x,y) -> x+y).getAsInt();
 	}
 	
 	// Maak gebruik van lambdas en streams om een comma-separated
@@ -49,13 +47,13 @@ public class Exam {
 	// zijn aan twee
 	// 2 punten
 	public String getXOverTwo(List<Point> points) {
-        Optional<String> answer = points.stream()
+
+
+	    return points.stream()
                 .map(p -> p.getX())
                 .filter( x -> x > 2)
                 .map( x -> x.toString())
-                .reduce((x, y) -> x + "," + y);
-
-
-                return answer.toString();
+                .reduce((x, y) -> x + "," + y)
+                .toString();
 	}
 }
